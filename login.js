@@ -35,5 +35,5 @@ btn.onclick = async () => {
     email: data.email
   }))
 
-  window.location.href = 'panelAdmin.html'
+  window.location.href = 'panel-admin/panel.html'
 }

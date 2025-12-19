@@ -5,7 +5,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 // ------------------------
 const admin = localStorage.getItem('admin')
 if (!admin) {
-  window.location.href = 'index.html'
+  window.location.href = '../index.html'
 }
 
 // ------------------------
@@ -24,7 +24,7 @@ const logoutBtn = document.getElementById('logoutBtn')
 // ------------------------
 logoutBtn.onclick = () => {
   localStorage.removeItem('admin')
-  window.location.href = 'index.html'
+  window.location.href = '../index.html'
 }
 
 // ------------------------

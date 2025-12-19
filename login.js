@@ -15,7 +15,11 @@ const supabase = createClient(
 const btn = document.getElementById('loginBtn')
 const errorText = document.getElementById('error')
 
-btn.onclick = async () => {
+const form = document.getElementById('loginForm')
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault() // ⛔ evita recarga
+
   const email = document.getElementById('email').value.trim()
   const password = document.getElementById('password').value.trim()
 
@@ -23,6 +27,8 @@ btn.onclick = async () => {
     errorText.textContent = 'Completa todos los campos'
     return
   }
+
+  errorText.textContent = ''
 
   const { data, error } = await supabase
     .from('administradores')
@@ -36,11 +42,10 @@ btn.onclick = async () => {
     return
   }
 
-  // Guardar sesión simple
   localStorage.setItem('admin', JSON.stringify({
     id: data.id,
     email: data.email
   }))
 
   window.location.href = 'panel-admin/panel.html'
-}
+})

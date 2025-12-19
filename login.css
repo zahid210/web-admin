@@ -70,3 +70,8 @@ body {
 .btn-login:hover {
     background: #357ABD;
 }
+
+p {
+    color: red;
+
+}

@@ -1,13 +1,31 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// 🔐 Credenciales Supabase
+// ------------------------
+// PROTECCIÓN LOGIN ADMIN
+// ------------------------
+const admin = localStorage.getItem('admin')
+if (!admin) {
+  window.location.href = 'login.html'
+}
+
+// ------------------------
+// Supabase
+// ------------------------
 const supabaseUrl = 'https://qdrmvjptjjayfxdwniub.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkcm12anB0ampheWZ4ZHduaXViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUwNjUwODIsImV4cCI6MjA4MDY0MTA4Mn0.3t5qH77EcWaK4SDCtJOLfP-s-Wtm9ZIulbk0YGrfQWc'
-
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 const tbody = document.querySelector('#tabla-reportes tbody')
 const errorText = document.getElementById('error')
+const logoutBtn = document.getElementById('logoutBtn')
+
+// ------------------------
+// Logout
+// ------------------------
+logoutBtn.onclick = () => {
+  localStorage.removeItem('admin')
+  window.location.href = 'login.html'
+}
 
 // ------------------------
 // Cargar reportes
@@ -65,7 +83,7 @@ function escucharCambiosRealtime() {
     .on(
       'postgres_changes',
       {
-        event: '*',           // INSERT | UPDATE | DELETE
+        event: '*',
         schema: 'public',
         table: 'reportes'
       },

@@ -21,12 +21,30 @@ body {
   color: var(--text);
 }
 
-h1 {
-  font-size: 22px;
-  font-weight: 600;
+/* ---------- HEADER ---------- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
+.topbar h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.topbar button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--danger);
+  color: white;
+}
+
+/* ---------- CARD ---------- */
 .card {
   background: var(--card);
   border-radius: 14px;
@@ -34,6 +52,7 @@ h1 {
   overflow: hidden;
 }
 
+/* ---------- TABLE ---------- */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -64,14 +83,27 @@ tbody tr:hover {
   background: #f9fafb;
 }
 
+.muted {
+  color: var(--muted);
+}
+
+/* ---------- IMAGES ---------- */
 img {
   width: 72px;
   height: 72px;
   object-fit: cover;
   border-radius: 10px;
   border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- LINKS ---------- */
 a {
   color: var(--accent);
   text-decoration: none;
@@ -82,22 +114,9 @@ a:hover {
   text-decoration: underline;
 }
 
+/* ---------- ERROR ---------- */
 .error {
   margin-top: 16px;
   font-size: 14px;
   color: var(--danger);
-}
-
-.muted {
-  color: var(--muted);
-}
-
-td a img {
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-td a img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }

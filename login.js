@@ -7,20 +7,25 @@ if (localStorage.getItem('admin')) {
   window.location.href = 'panel-admin/panel.html'
 }
 
+// ------------------------
+// Supabase
+// ------------------------
 const supabase = createClient(
   'https://qdrmvjptjjayfxdwniub.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkcm12anB0ampheWZ4ZHduaXViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUwNjUwODIsImV4cCI6MjA4MDY0MTA4Mn0.3t5qH77EcWaK4SDCtJOLfP-s-Wtm9ZIulbk0YGrfQWc'
 )
 
+// ------------------------
+// DOM
+// ------------------------
 const btn = document.getElementById('loginBtn')
 const errorText = document.getElementById('error')
 
-const form = document.getElementById('loginForm')
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault() // ⛔ evita recarga
-
-  const email = document.getElementById('email').value.trim()
+// ------------------------
+// LOGIN
+// ------------------------
+btn.addEventListener('click', async () => {
+  const email = document.getElementById('email').value.trim().toLowerCase()
   const password = document.getElementById('password').value.trim()
 
   if (!email || !password) {
@@ -32,7 +37,7 @@ form.addEventListener('submit', async (e) => {
 
   const { data, error } = await supabase
     .from('administradores')
-    .select('*')
+    .select('id, email')
     .eq('email', email)
     .eq('password', password)
     .single()
@@ -42,10 +47,16 @@ form.addEventListener('submit', async (e) => {
     return
   }
 
-  localStorage.setItem('admin', JSON.stringify({
-    id: data.id,
-    email: data.email
-  }))
+  // ------------------------
+  // Guardar sesión simple
+  // ------------------------
+  localStorage.setItem(
+    'admin',
+    JSON.stringify({
+      id: data.id,
+      email: data.email
+    })
+  )
 
   window.location.href = 'panel-admin/panel.html'
 })

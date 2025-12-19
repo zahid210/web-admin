@@ -19,13 +19,20 @@ const tbody = document.querySelector('#tabla-reportes tbody')
 const errorText = document.getElementById('error')
 const logoutBtn = document.getElementById('logoutBtn')
 
+let realtimeChannel = null
+
 // ------------------------
 // Logout
 // ------------------------
-logoutBtn.onclick = () => {
+logoutBtn.onclick = async () => {
+  if (realtimeChannel) {
+    await supabase.removeChannel(realtimeChannel)
+  }
+
   localStorage.removeItem('admin')
   window.location.href = '../index.html'
 }
+
 
 // ------------------------
 // Cargar reportes
@@ -78,7 +85,7 @@ async function cargarReportes() {
 // Realtime listener
 // ------------------------
 function escucharCambiosRealtime() {
-  supabase
+  realtimeChannel = supabase
     .channel('realtime-reportes')
     .on(
       'postgres_changes',
@@ -96,6 +103,7 @@ function escucharCambiosRealtime() {
       console.log('📡 Realtime:', status)
     })
 }
+
 
 // ------------------------
 // Inicializar

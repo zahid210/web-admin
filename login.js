@@ -1,5 +1,12 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
+// ------------------------
+// SI YA ESTÁ LOGUEADO
+// ------------------------
+if (localStorage.getItem('admin')) {
+  window.location.href = 'panel-admin/panel.html'
+}
+
 const supabase = createClient(
   'https://qdrmvjptjjayfxdwniub.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFkcm12anB0ampheWZ4ZHduaXViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUwNjUwODIsImV4cCI6MjA4MDY0MTA4Mn0.3t5qH77EcWaK4SDCtJOLfP-s-Wtm9ZIulbk0YGrfQWc'

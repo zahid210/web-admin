@@ -5,7 +5,7 @@ body {
     height: 100vh;
     margin: 0;
     background-color: gray;
-    padding: 10px; /* para que no se pegue en pantallas muy pequeñas */
+    padding: 10px;
 }
 
 /* Tarjeta minimalista */
@@ -13,11 +13,11 @@ body {
     background: white;
     border-radius: 15px;
     width: 100%;
-    max-width: 400px; /* limita el tamaño en pantallas grandes */
+    max-width: 400px;
     padding: 30px 20px;
     text-align: center;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    box-sizing: border-box; /* para que padding no afecte el ancho */
+    box-sizing: border-box;
 }
 
 .tarjeta-titulo {

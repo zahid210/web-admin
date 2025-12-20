@@ -1,103 +1,211 @@
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: gray;
-    padding: 10px;
-}
+/* @import de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
 
-/* Tarjeta minimalista */
-.tarjeta-minimal {
-    background: white;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 400px;
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+/* Reset básico */
+* {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.tarjeta-titulo {
-    margin: 10px 0 5px;
-    font-size: 1.5em;
-    font-weight: 600;
-    color: #333;
+body {
+    min-height: 100vh;
+    background: url("backgroundWeb.png") no-repeat center center;
+    background-size: cover;
+    font-family: 'Heebo', sans-serif;
+
+    /* Posicionamiento del panel a la derecha */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 90px;
+    background-attachment: fixed; /* Mantiene el fondo estático al hacer scroll */
 }
 
-.tarjeta-subtitulo {
-    margin: 0 0 20px;
-    font-size: 0.9em;
-    font-weight: normal;
-    color: #777;
-}
+/* ===== PANEL ===== */
+.panel-login {
+    width: 100%;
+    max-width: 648px;
+    min-height: 787px;
+    background: rgba(235, 235, 235, 0.98); /* Ligera transparencia para estilo premium */
+    padding: 70px 60px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
 
-.tarjeta-img {
-    width: 80px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-/* Formulario minimal */
-.form-login {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
-.form-login input {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 14px;
+/* ===== TITULOS ===== */
+.titulo {
+    font-size: 34px;
+    font-weight: 700;
+    color: #b23b3b;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.subtitulo {
+    margin-top: 8px;
+    margin-bottom: 45px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #b0b0b0;
+    font-weight: 500;
+}
+
+/* ===== FORM ===== */
+.form-login {
+    width: 100%;
+    max-width: 525px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===== INPUTS ===== */
+.form-login input[type="email"],
+.form-login input[type="password"] {
+    width: 100%;
+    height: 85px; /* Ajustado de 105px a 85px para mejor estética */
+    background: #ffffff;
+    border: 2px solid transparent;
     outline: none;
-    transition: border-color 0.2s ease;
+    padding: 0 30px;
+    font-size: 20px;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
 }
 
+/* Feedback visual al hacer clic */
 .form-login input:focus {
-    border-color: #4a90e2;
+    border-color: #b23b3b;
+    box-shadow: 0 4px 10px rgba(178, 59, 59, 0.1);
 }
 
-.btn-login {
-    background: #4a90e2;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
+.form-login input::placeholder {
+    color: #cfcfcf;
+    font-weight: 300;
+}
+
+/* ===== RECORDARME ===== */
+.recordar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    font-size: 18px;
+    color: #8a8a8a;
     cursor: pointer;
-    transition: background 0.2s ease;
 }
 
-.btn-login:hover {
-    background: #357ABD;
+.recordar input {
+    width: 20px;
+    height: 20px;
+    accent-color: #b23b3b; /* Color del checkbox */
+    cursor: pointer;
 }
 
-p {
-    color: red;
+/* ===== BOTON ===== */
+button {
+    width: 243px;
+    height: 80px; /* Ajustado para balancear con los inputs */
+    background: #b23b3b;
+    color: #ffffff;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Media Queries para pantallas pequeñas */
-@media (max-width: 500px) {
-    .tarjeta-minimal {
-        padding: 20px 15px;
+button:hover {
+    background: #8e2f2f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(178, 59, 59, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ===== ERROR ===== */
+#error {
+    margin-top: 25px;
+    min-height: 20px;
+    font-size: 14px;
+    color: #b23b3b;
+    font-weight: 500;
+}
+
+/* ============================= */
+/* RESPONSIVE OPTIMIZADO */
+/* ============================= */
+
+/* Pantallas grandes y medianas (Laptops/Tablets) */
+@media (max-width: 1200px) {
+    body {
+        padding-right: 50px;
     }
-    .tarjeta-titulo {
-        font-size: 1.3em;
+    .panel-login {
+        max-width: 550px;
+        padding: 60px 40px;
     }
-    .tarjeta-subtitulo {
-        font-size: 0.8em;
+}
+
+/* Tablets horizontales y verticales */
+@media (max-width: 992px) {
+    body {
+        justify-content: center;
+        padding-right: 0;
+        padding: 20px;
     }
-    .tarjeta-img {
-        width: 60px;
+    .panel-login {
+        max-width: 500px;
+        min-height: auto;
     }
-    .form-login input, .btn-login {
-        font-size: 13px;
-        padding: 10px;
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+    .panel-login {
+        background: rgba(235, 235, 235, 1);
+        padding: 40px 25px;
+        box-shadow: none;
     }
-    .btn-login {
-        font-size: 14px;
+
+    .titulo {
+        font-size: 28px;
+    }
+
+    .form-login input[type="email"],
+    .form-login input[type="password"] {
+        height: 65px;
+        font-size: 17px;
+    }
+
+    .recordar {
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%; /* Botón ancho completo en móvil */
+        height: 65px;
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 380px) {
+    .titulo {
+        font-size: 24px;
+    }
+    .subtitulo {
+        margin-bottom: 30px;
     }
 }

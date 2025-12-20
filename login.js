@@ -18,13 +18,16 @@ const supabase = createClient(
 // ------------------------
 // DOM
 // ------------------------
-const btn = document.getElementById('loginBtn')
+const form = document.getElementById('loginForm')
 const errorText = document.getElementById('error')
+const btn = document.getElementById('loginBtn')
 
 // ------------------------
-// LOGIN
+// LOGIN (ENTER + CLICK)
 // ------------------------
-btn.addEventListener('click', async () => {
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+
   const email = document.getElementById('email').value.trim().toLowerCase()
   const password = document.getElementById('password').value.trim()
 
@@ -34,6 +37,8 @@ btn.addEventListener('click', async () => {
   }
 
   errorText.textContent = ''
+  btn.disabled = true
+  btn.textContent = 'INGRESANDO...'
 
   const { data, error } = await supabase
     .from('administradores')
@@ -42,21 +47,18 @@ btn.addEventListener('click', async () => {
     .eq('password', password)
     .single()
 
+  btn.disabled = false
+  btn.textContent = 'INGRESAR'
+
   if (error || !data) {
     errorText.textContent = 'Credenciales incorrectas'
     return
   }
 
-  // ------------------------
-  // Guardar sesión simple
-  // ------------------------
-  localStorage.setItem(
-    'admin',
-    JSON.stringify({
-      id: data.id,
-      email: data.email
-    })
-  )
+  localStorage.setItem('admin', JSON.stringify({
+    id: data.id,
+    email: data.email
+  }))
 
   window.location.href = 'panel-admin/panel.html'
 })

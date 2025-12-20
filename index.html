@@ -8,24 +8,25 @@
 </head>
 <body>
 
-<div class="tarjeta tarjeta-minimal">
-    <img class="tarjeta-img" src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
-         alt="Avatar">
+<div class="panel-login">
+    <h1 class="titulo">INICIAR SESIÓN</h1>
+    <p class="subtitulo">PORTAL ADMINISTRATIVO</p>
 
-    <h1 class="tarjeta-titulo">Login - Admin</h1>
-    <h2 class="tarjeta-subtitulo">Accede como administrador</h2>
+    <form id="loginForm" class="form-login">
+        <input id="email" type="email" placeholder="Email" required>
+        <input id="password" type="password" placeholder="Contraseña" required>
 
-    <div class="tarjeta-contenido">
-        <form class="form-login" id="loginForm">
-            <input id="email" type="email" placeholder="Email"/>
-            <input id="password" type="password" placeholder="Password"/>
-            <button type="button" id="loginBtn" class="btn-login">
-                Ingresar
-            </button>
-            <p id="error"></p>
-        </form>
-    </div>
+        <label class="recordar">
+            <input type="checkbox">
+            <span>Recordarme</span>
+        </label>
+
+        <button type="submit" id="loginBtn">INGRESAR</button>
+        <p id="error"></p>
+    </form>
 </div>
+
+
 <script type="module" src="login.js"></script>
 </body>
 </html>

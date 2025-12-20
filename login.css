@@ -4,16 +4,20 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
+    background-color: gray;
+    padding: 10px; /* para que no se pegue en pantallas muy pequeñas */
 }
 
 /* Tarjeta minimalista */
 .tarjeta-minimal {
     background: white;
     border-radius: 15px;
-    width: 320px;
+    width: 100%;
+    max-width: 400px; /* limita el tamaño en pantallas grandes */
     padding: 30px 20px;
     text-align: center;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-sizing: border-box; /* para que padding no afecte el ancho */
 }
 
 .tarjeta-titulo {
@@ -73,5 +77,27 @@ body {
 
 p {
     color: red;
+}
 
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 500px) {
+    .tarjeta-minimal {
+        padding: 20px 15px;
+    }
+    .tarjeta-titulo {
+        font-size: 1.3em;
+    }
+    .tarjeta-subtitulo {
+        font-size: 0.8em;
+    }
+    .tarjeta-img {
+        width: 60px;
+    }
+    .form-login input, .btn-login {
+        font-size: 13px;
+        padding: 10px;
+    }
+    .btn-login {
+        font-size: 14px;
+    }
 }

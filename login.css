@@ -27,7 +27,7 @@ body {
     width: 100%;
     max-width: 648px;
     min-height: 787px;
-    background: rgba(235, 235, 235, 0.98); /* Ligera transparencia para estilo premium */
+    background: rgba(220, 223, 228,0.9); /* Ligera transparencia para estilo premium */
     padding: 70px 60px;
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
 

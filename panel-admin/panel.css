@@ -196,7 +196,7 @@ body {
     background-color: #ffffff;
     margin-bottom: 12px;
     border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     padding: 12px 0;
   }
 
@@ -232,5 +232,53 @@ body {
   .error {
     margin: 10px 16px;
     font-size: 13px;
+  }
+}
+
+/* ===== PAGINACIÓN ===== */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 32px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.pagination button {
+  min-width: 36px;
+  height: 36px;
+  border: 1px solid #b73a3f;
+  background-color: #fff;
+  color: #b73a3f;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #b73a3f;
+  color: #fff;
+}
+
+.pagination button.active {
+  background-color: #b73a3f;
+  color: #fff;
+  cursor: default;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== PAGINACIÓN RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .pagination {
+    justify-content: center;
+    padding: 12px 16px;
+    flex-wrap: wrap;
   }
 }

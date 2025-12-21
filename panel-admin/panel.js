@@ -24,14 +24,13 @@ let realtimeChannel = null
 // ------------------------
 // Logout
 // ------------------------
-logoutBtn.onclick = async () => {
-  if (realtimeChannel) {
-    await supabase.removeChannel(realtimeChannel)
-  }
+logoutBtn.addEventListener('click', () => {
+    // 1. Borramos solo la sesión, NO el email recordado
+    localStorage.removeItem('admin');
 
-  localStorage.removeItem('admin')
-  window.location.href = '../index.html'
-}
+    // 2. Mandamos al usuario de vuelta al login
+    window.location.href = '../index.html';
+});
 
 
 // ------------------------

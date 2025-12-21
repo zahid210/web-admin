@@ -10,29 +10,36 @@
 
 <body>
 
-<header class="topbar">
-    <h1>Reportes</h1>
-    <button id="logoutBtn">Salir</button>
-</header>
+    <header class="topbar">
+        <h1>Reportes</h1>
+        <button id="logoutBtn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                    d="M16 13v-2H7V8l-5 4 5 4v-3zM20 3H10a2 2 0 0 0-2 2v4h2V5h10v14H10v-4H8v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" />
+            </svg>
+        </button>
 
-<div class="card">
-    <table id="tabla-reportes">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Usuario</th>
-            <th>Descripción</th>
-            <th>Fecha</th>
-            <th>Foto</th>
-            <th>Mapa</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
+    </header>
 
-<p id="error" class="error"></p>
+    <div class="card">
+        <table id="tabla-reportes">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Foto</th>
+                    <th>Mapa</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 
-<script type="module" src="panel.js"></script>
+    <p id="error" class="error"></p>
+
+    <script type="module" src="panel.js"></script>
 </body>
+
 </html>

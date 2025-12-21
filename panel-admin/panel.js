@@ -25,10 +25,7 @@ let realtimeChannel = null
 // Logout
 // ------------------------
 logoutBtn.addEventListener('click', () => {
-    // 1. Borramos solo la sesión, NO el email recordado
     localStorage.removeItem('admin');
-
-    // 2. Mandamos al usuario de vuelta al login
     window.location.href = '../index.html';
 });
 
@@ -57,21 +54,20 @@ async function cargarReportes() {
 
     const tr = document.createElement('tr')
 
+    // Adaptación para que los enlaces parezcan botones del mockup
     tr.innerHTML = `
       <td>${r.id}</td>
-      <td class="muted">${r.user_email ?? '-'}</td>
+      <td>${r.user_email ?? '-'}</td>
       <td>${r.descripcion ?? '-'}</td>
-      <td class="muted">${fecha}</td>
+      <td>${fecha}</td>
       <td>
         ${r.foto_url
-          ? `<a href="${r.foto_url}" target="_blank" rel="noopener">
-               <img src="${r.foto_url}" />
-             </a>`
+          ? `<button class="btn-tabla" onclick="window.open('${r.foto_url}', '_blank')">VER FOTO</button>`
           : '-'}
       </td>
       <td>
         ${r.maps_url
-          ? `<a href="${r.maps_url}" target="_blank">Ver mapa</a>`
+          ? `<button class="btn-tabla" onclick="window.open('${r.maps_url}', '_blank')">VER MAPA</button>`
           : '-'}
       </td>
     `
@@ -94,15 +90,11 @@ function escucharCambiosRealtime() {
         table: 'reportes'
       },
       payload => {
-        console.log('🔄 Cambio detectado:', payload.eventType)
         cargarReportes()
       }
     )
-    .subscribe(status => {
-      console.log('📡 Realtime:', status)
-    })
+    .subscribe()
 }
-
 
 // ------------------------
 // Inicializar

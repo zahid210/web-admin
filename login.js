@@ -10,15 +10,16 @@ const supabase = createClient(
 const form = document.getElementById('loginForm')
 const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')
-const recordarCheckbox = document.getElementById('recordarCheckbox') // Asegúrate que este ID exista en tu HTML
+const recordarCheckbox = document.getElementById('recordarCheckbox')
 const errorText = document.getElementById('error')
 const btn = document.getElementById('loginBtn')
 
-// 3. Persistencia inicial (Recordarme)
-// Al cargar la página, verificamos si hay un email guardado
-document.addEventListener('DOMContentLoaded', () => {
-  // Redirección si ya está logueado
-  if (localStorage.getItem('admin')) {
+// 3. Persistencia inicial
+document.addEventListener('DOMContentLoaded', async () => {
+  // ✅ Verificación de sesión real de Supabase
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (session) {
     window.location.href = 'panel-admin/panel.html'
     return
   }
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (savedEmail) {
     emailInput.value = savedEmail
     recordarCheckbox.checked = true
-    passwordInput.focus() // Salta directo al password si el email ya está
+    passwordInput.focus()
   }
 })
 
@@ -38,25 +39,22 @@ form.addEventListener('submit', async (e) => {
   const email = emailInput.value.trim().toLowerCase()
   const password = passwordInput.value.trim()
 
-  // Validación simple
   if (!email || !password) {
     showError('Completa todos los campos')
     return
   }
 
-  // Feedback visual
   toggleLoading(true)
 
   try {
-    const { data, error } = await supabase
-      .from('administradores')
-      .select('id, email')
-      .eq('email', email)
-      .eq('password', password) // Nota: En producción, usa hash de contraseñas
-      .single()
+    // ✅ CAMBIO CLAVE: Usamos el metodo oficial de autenticación
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+    })
 
-    if (error || !data) {
-      showError('Credenciales incorrectas')
+    if (error) {
+      showError('Credenciales incorrectas o usuario no autorizado')
       toggleLoading(false)
       return
     }
@@ -68,13 +66,8 @@ form.addEventListener('submit', async (e) => {
       localStorage.removeItem('rememberedEmail')
     }
 
-    // Guardar sesión del administrador
-    localStorage.setItem('admin', JSON.stringify({
-      id: data.id,
-      email: data.email,
-      loginTime: Date.now()
-    }))
-
+    // Ya no necesitamos guardar el "admin" en localStorage manualmente,
+    // Supabase Auth ya gestiona la sesión en el navegador.
     window.location.href = 'panel-admin/panel.html'
 
   } catch (err) {
@@ -83,10 +76,8 @@ form.addEventListener('submit', async (e) => {
   }
 })
 
-// Funciones de utilidad para limpiar el código
 function showError(msg) {
   errorText.textContent = msg
-  // Opcional: vibración o sacudida del panel
   errorText.style.animation = "shake 0.3s"
   setTimeout(() => errorText.style.animation = "", 300)
 }
@@ -94,5 +85,4 @@ function showError(msg) {
 function toggleLoading(isLoading) {
   btn.disabled = isLoading
   btn.textContent = isLoading ? 'INGRESANDO...' : 'INGRESAR'
-  btn.style.opacity = isLoading ? '0.7' : '1'
 }
